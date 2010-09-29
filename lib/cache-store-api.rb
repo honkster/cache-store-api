@@ -1,4 +1,4 @@
-module Cacheable
+module CacheStoreApi
   module CommonMethods
     def lazy_cache(key, expiration=3600)
       if block_given?
@@ -34,6 +34,6 @@ module Cacheable
   end)
 
   def cache
-    Cacheable.cache
+    CacheStoreApi.cache
   end
 end

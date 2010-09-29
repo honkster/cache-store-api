@@ -1,4 +1,4 @@
-module Cacheable
+module CacheStoreApi
   class TestCache
     attr_reader :data
     def initialize
