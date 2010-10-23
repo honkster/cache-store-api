@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec"
 
-  s.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.md ROADMAP.md CHANGELOG.md)
-  s.executables  = ['bundle']
+  s.files        = Dir.glob("{bin,lib}/**/*") + %w(LICENSE README.md)
   s.require_path = 'lib'
 end
