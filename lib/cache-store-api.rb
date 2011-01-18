@@ -2,11 +2,13 @@ module CacheStoreApi
   module CommonMethods
     def lazy_cache(key, expiration=3600)
       if block_given?
-        unless output = cache.read(key)
+        if cache.exist?(key)
+          cache.read(key)
+        else
           output = yield
           cache.write(key, output, :expires_in => expiration)
+          output
         end
-        output
       else
         cache.read(key)
       end
