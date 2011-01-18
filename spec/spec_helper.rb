@@ -4,6 +4,7 @@ require "rspec"
 
 $LOAD_PATH.unshift(File.expand_path("#{File.dirname(__FILE__)}/../lib"))
 require "cache-store-api"
+require "cache-store-api/test_cache"
 
 RSpec.configure do |configuration|
   configuration.mock_with :rr

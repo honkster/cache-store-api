@@ -18,7 +18,7 @@ module CacheStoreApi
     end
 
     def exist?(key, options = nil)
-      data.exists? key
+      data.has_key? key
     end
   end
 end
