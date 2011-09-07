@@ -54,7 +54,7 @@ module CacheStoreApi
 
     protected
     def perform_caching_lambda
-      @perform_caching_lambda || lambda do
+      @perform_caching_lambda ||= lambda do
         true
       end
     end
