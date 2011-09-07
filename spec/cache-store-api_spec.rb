@@ -22,32 +22,46 @@ describe CacheStoreApi do
   end
 
   describe ".disable_cache!" do
-    it "should set the @caching_status instance variable to :disabled" do
+    it "should set the #caching? to false" do
       cache_store_api.disable_cache!
-      cache_store_api.instance_variable_get(:@caching_status).should be(:disabled)
+      cache_store_api.caching?.should == false
+    end
+  end
+
+  describe ".set_perform_caching" do
+    it "sets .caching? to true when truthy and false when falsy" do
+      cache_store_api.set_perform_caching {true}
+      cache_store_api.caching?.should == true
+
+      cache_store_api.set_perform_caching {false}
+      cache_store_api.caching?.should == false
+
+      cache_store_api.set_perform_caching {"hi"}
+      cache_store_api.caching?.should == true
+
+      cache_store_api.set_perform_caching {nil}
+      cache_store_api.caching?.should == false
     end
   end
 
   describe ".enable_cache!" do
-    it "should set the @caching_status instance variable to :enabled" do
+    it "should set the #caching? to true" do
       cache_store_api.enable_cache!
-      cache_store_api.instance_variable_get(:@caching_status).should be(:enabled)
+      cache_store_api.caching?.should == true
     end
   end
 
   describe ".caching?" do
-    it "should set the @caching_status instance variable to :enabled, if not already set" do
-      cache_store_api.instance_variable_get(:@caching_status).should be_nil
-      cache_store_api.caching?
-      cache_store_api.instance_variable_get(:@caching_status).should be(:enabled)
-    end
-
     it "should reflect the value of @caching_status" do
       cache_store_api.caching?.should be_true
 
       cache_store_api.disable_cache!
 
       cache_store_api.caching?.should be_false
+
+      cache_store_api.enable_cache!
+
+      cache_store_api.caching?.should be_true
     end
   end
 

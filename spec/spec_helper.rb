@@ -2,6 +2,7 @@ require "rubygems"
 require "bundler/setup"
 
 Bundler.require :default, :development
+require "rspec/autorun"
 
 require "cache-store-api"
 

@@ -33,25 +33,30 @@ module CacheStoreApi
     end
 
     def caching?
-      self.caching_status == :enabled
+      !!perform_caching_lambda.call
+    end
+
+    def set_perform_caching(&block)
+      @perform_caching_lambda = block
     end
 
     def enable_cache!
-      self.caching_status = :enabled
+      set_perform_caching do
+        true
+      end
     end
 
     def disable_cache!
-      self.caching_status = :disabled
+      set_perform_caching do
+        false
+      end
     end
 
     protected
-    def caching_status
-      @caching_status || self.caching_status = :enabled
-    end
-
-    def caching_status=(status)
-      raise ArgumentError unless [:enabled, :disabled].include? status
-      @caching_status = status
+    def perform_caching_lambda
+      @perform_caching_lambda || lambda do
+        true
+      end
     end
   end
 end
